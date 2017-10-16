@@ -1,9 +1,9 @@
 /**********************************************************
 Naive Bayes Project README File
 Date:	10/19/2017 
-Authors:	Chih-Yu Shen 					cyushen@unm.edu
-			    Haijin He 					  把你邮箱写一下
-			    Christina Xuan Yu 		xyu@unm.edu
+Authors:	Chih-Yu Shen 		cyushen@unm.edu
+		Haijin He 		把你邮箱写一下
+		Christina Xuan Yu 	xyu@unm.edu
 /**********************************************************
 
 - Run preprocessor.py first to generate an organized smaller file result.csv from training.csv.
