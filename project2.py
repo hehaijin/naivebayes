@@ -1,6 +1,8 @@
 import csv
 import numpy as np
 import ast
+import time
+t1=time.time()
 
 VOC_NUM = 61188
 TRAINING_NUM = 12000
