@@ -31,7 +31,7 @@ def Main():
   # output file
   outfile = open("Top_100_Vocs.csv", 'wb')
   outputWriter = csv.writer(outfile)
-  outputWriter.writerow(["Top 100 Vocabularies"])
+  outputWriter.writerow(["Index", "Top 100 Vocabularies",  "Class Belongs To"])
 
   # read result.csv generated from preprocess.py
   i=0
@@ -49,9 +49,22 @@ def Main():
 
   answer = ComputeRanking()
 
-  #output the top 100 vocabulary with smallest entropy
-  for i in range(100): 
-    outputWriter.writerow([voc[int(answer[i])]])
+#   #output the top 100 vocabulary with smallest entropy
+#   for i in range(100): 
+#     outputWriter.writerow([voc[int(answer[i])]])
+
+  # outputwrites the 100 vocs and the class index that voc appears in
+  a = 1
+  for j in range(100):
+    maxX = 0
+    index = 0
+    for i in range(GROUP_NUM): 
+      if(voc_in_group[i][int(answer[j])] > maxX):
+        maxX = voc_in_group[i][int(answer[j])]
+        index = i
+      # print ("voc_in_group["+str(i)+"][int(answer["+str(j)+"])]: "+str(voc_in_group[i][int(answer[j])]))
+    outputWriter.writerow([a, voc[int(answer[j])],  int(index+1)])
+    a += 1
 
 #############################################################################
 # This method ouputs the ranking of vocabularies' indices by smallest entropy
@@ -65,20 +78,27 @@ def Main():
 ############################################################################# 
 def ComputeRanking():
   voc_ranking = np.zeros(VOC_NUM)
-  # sum up the count of total vocabularies in class K
-  sumX = [sum(voc_in_group[i]) for i in range(GROUP_NUM)]
+  # sum up the count of total vocabularies in class K, size 1 by 20
+  sumX = np.sum(voc_in_group, axis=1)
+  # sum up the count of each voc appears in all classes, size 1 by 61188
+  sumY = np.sum(voc_in_group, axis=0)
+  
   for i in range(GROUP_NUM):
     # compute the prior using MLE
+    # we could set all the p(y) = 1/20, to be iid
     py = num_group[i] / TRAINING_NUM
     for j in range(VOC_NUM):
       # compute the likelyhood using MAP
-      pxy = (voc_in_group[i][j]+beta-1)/(sumX[i]+beta-1)
+      pxy = (voc_in_group[i][j]+beta-1)/(sumX[i]+(beta-1)*VOC_NUM)
       # compute the P(y_k|x_i) = P(y_k)*P(x_i|y_k)
       voc_prob[i][j] = py*pxy
       # conditional entropy
       voc_prob[i][j] = -voc_prob[i][j]* math.log(voc_prob[i][j],2)
-      # total entropy
-      voc_ranking += voc_prob[i][j] 
+      # filter out the voc appeared in no classes by giving its entropy a penalty 1
+      if(sumY[j] == 0.0): 
+        voc_prob[i][j] += 1
+  # total entropy
+  voc_ranking = np.sum(voc_prob, axis=0)
   # return the indices of vocabularies sorting from smallest entropy    
   return np.argsort(voc_ranking)
 
