@@ -94,7 +94,7 @@ def ComputeRanking():
       voc_prob[i][j] = py*pxy
       # conditional entropy
       voc_prob[i][j] = -voc_prob[i][j]* math.log(voc_prob[i][j],2)
-      # filter out the voc appeared in no classes by giving its entropy a penalty 1
+      # filter out the voc appeared in no classes by giving its entropy a penalty
       if(sumY[j] == 0.0): 
         voc_prob[i][j] += 1
   # total entropy
