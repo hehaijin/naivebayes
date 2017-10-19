@@ -3,12 +3,12 @@ import numpy as np
 import ast
 import time
 
-VOC_NUM = 61188
-TRAINING_NUM = 12000
-GROUP_NUM = 20
-num_group = np.zeros(GROUP_NUM)
-voc_in_group = np.zeros([GROUP_NUM,VOC_NUM])
-PY=np.zeros(GROUP_NUM)
+VOC_NUM = 61188    #vacabulary count
+TRAINING_NUM = 12000   #total training files
+GROUP_NUM = 20 #total groups
+#num_group = np.zeros(GROUP_NUM)    
+voc_in_group = np.zeros([GROUP_NUM,VOC_NUM])  #array to store probability estimation
+PY=np.zeros(GROUP_NUM) #array to store PY
 
 def Main(beta):
   csvfile = open("result.csv", 'rb')
@@ -22,32 +22,34 @@ def Main(beta):
   for row in resultReader:
     row = np.array(row)
     row = row.astype(float)
-    num_group[i] = row[-1]
+    #num_group[i] = row[-1]
     voc_in_group[i] = row[:-1]
     i+=1
-  total=0
+  total=0 #the total number of words in all training files combined
   for i in range(GROUP_NUM):
     s=sum(voc_in_group[i])
     total=total+s
-    print s
     PY[i]=s
     for j in range(VOC_NUM):
+		#the probability estimation with beta
       voc_in_group[i][j]=np.log((voc_in_group[i][j]+beta)/(s+ VOC_NUM*beta))
- 
+  #calculating PY  
   for i in range(GROUP_NUM):
     PY[i]=np.log(PY[i]/total)
   
   print "Start reading test file..."
   
   for row in testReader:
-    #print type(row)  
+  
     row = np.array(row)
     row = row.astype(float)
-    #print type(row)
+    #use matrix multiplication 
     row2=np.reshape(row[1:], (VOC_NUM,1))
     answer =np.dot(voc_in_group,row2)
+    #adding PY
     for i in range(GROUP_NUM):
 		answer[i]=answer[i]+PY[i]
+	#getting the max	
     m=max(answer)
     for i in range(20):
 		if answer[i]==m:
