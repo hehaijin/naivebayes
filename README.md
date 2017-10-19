@@ -6,12 +6,34 @@ Authors:	Chih-Yu Shen 		cyushen@unm.edu
 		Christina Xuan Yu 	xyu@unm.edu
 /**********************************************************
 
-- Run preprocessor.py first to generate an organized smaller file result.csv from training.csv.
-- Then run project2.py to generate final answer answer.csv for testing file  
+1. This project is impelemented with Python. The files contained 
+in the project are:
+	README.txt
+	Makefile
+	preprocess.py
+	project2.py
+	withbeta.py
+	plotbeta.py
+	rankvocs.py
+	training.csv
+	testing.csv
 
+2. To run the project, please run the makefile using the command:
+make -f makefile
 
--Run rankvocs.py with 2 input files: result.csv, vocabulary.txt. 
- It will generate Top_100_Vocs.csv
+Note: We adjust the training.csv in preprocess.py, so the output result.csv has the training data size much smaller. We now have the matrix of 20 by 61188, instead of 12000 by 61190.
+      However, it still takes about 15 minutes for withbeta.py and plotbeta.py 
+to generate the plot for Question 4.
+
+3. Answer files:
+A series of csv files containing answers will be generated for different questions.
+For Question 2,3:	answer.csv
+For Question 4:		answer0.0001.csv // when beta is set to 0.0001
+			answer0.001.csv  // when beta is set to 0.001
+			answer0.01.csv   // when beta is set to 0.01
+			answer0.1.csv    // when beta is set to 0.1
+			answer1.0.csv    // when beta is set to 1.0
+For Question 5,6,7:	Top_100_Vocs.csv
  
  
  
