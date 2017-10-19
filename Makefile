@@ -3,12 +3,15 @@ run:
 
 	python project2.py result.csv testing.csv
 
-	python ... 
-
 	python rankvocs.py result.csv vocabulary.txt
+	
+	python withbeta.py result.csv testing.csv
+
+	python plotbeta.py
 
 clean:
 	$(RM) preprocess *~
 	$(RM) project2 *~
-	$(RM) ...
 	$(RM) rankvocs *~
+	$(RM) withbeta *~
+	$(RM) plotbeta *~
