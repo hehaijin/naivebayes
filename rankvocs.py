@@ -17,10 +17,10 @@ voc_in_group = np.zeros([GROUP_NUM,VOC_NUM])
 voc_prob = np.zeros([GROUP_NUM,VOC_NUM])
 beta = 1.0 + 1.0/VOC_NUM 
 
-#######################################
-# Main method handles input and outputs
-# and calls ComputeRanking()
-####################################### 
+########################################
+# Main method handles input and outputs#
+# and calls ComputeRanking()           #
+######################################## 
 def Main():
   # input file
   csvfile = open("result.csv", 'rb')
@@ -66,16 +66,16 @@ def Main():
     outputWriter.writerow([a, voc[int(answer[j])],  int(index+1)])
     a += 1
 
-#############################################################################
-# This method ouputs the ranking of vocabularies' indices by smallest entropy
-# 1.computes the probability of the vucabulary given class k:
-# P(Y=y_k|Xi) = P(Y=y_k)*P(Xi=X|Y=y_k)the prior and likehood
-# 2.computes the conditional entropy for every vocabulary with respect to 
-# each class
-# 3.sums all the conditional entropies and get a total entropy for the
-# vocabulary.
-# 4. ranks and output the vocabularies' index 
-############################################################################# 
+##############################################################################
+# This method ouputs the ranking of vocabularies' indices by smallest entropy#
+# 1.computes the probability of the vucabulary given class k:                #
+# P(Y=y_k|Xi) = P(Y=y_k)*P(Xi=X|Y=y_k)the prior and likehood                 #
+# 2.computes the conditional entropy for every vocabulary with respect to    #
+# each class                                                                 #
+# 3.sums all the conditional entropies and get a total entropy for the       #
+# vocabulary.                                                                #
+# 4. ranks and output the vocabularies' index                                #
+############################################################################## 
 def ComputeRanking():
   voc_ranking = np.zeros(VOC_NUM)
   # sum up the count of total vocabularies in class K, size 1 by 20
