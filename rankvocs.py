@@ -49,11 +49,11 @@ def Main():
 
   answer = ComputeRanking()
 
-#   #output the top 100 vocabulary with smallest entropy
+# # output the top 100 vocabulary without class
 #   for i in range(100): 
 #     outputWriter.writerow([voc[int(answer[i])]])
 
-  # outputwrites the 100 vocs and the class index that voc appears in
+  # outputwrites the 100 vocs and the class index that voc appears the most in
   a = 1
   for j in range(100):
     maxX = 0
