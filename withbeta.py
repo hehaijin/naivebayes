@@ -1,3 +1,15 @@
+################################################################
+# Description:                                                 #
+# Read from the training file first to obtain required         # 
+# information, then use the information to calculate P(X) and  #
+# P(X|Y) in order to predict the newsgroup of testing data     #
+# For each row in testing data, go through those 20 newsgroups #
+# and find a probability for each newsgroup. The newsgroup     #
+# with the highest probability is the answer of prediction     #
+# Algorithm:                                                   #
+# P(Y|X) is propotional to P(X|Y)P(Y)                          #
+################################################################
+
 import csv
 import numpy as np
 import ast
