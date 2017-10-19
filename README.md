@@ -27,13 +27,15 @@ to generate the plot for Question 4.
 
 3. Answer files:
 A series of csv files containing answers will be generated for different questions.
-For Question 2,3:	answer.csv
-For Question 4:		answer0.0001.csv // when beta is set to 0.0001
+For Question 2,3:	preprocess.py, project2.py --> answer.csv
+For Question 4:		withbeta.py, plotbeta.py  --> 
+			answer0.00001.csv // when beta is set to 0.00001
+			answer0.0001.csv // when beta is set to 0.0001
 			answer0.001.csv  // when beta is set to 0.001
 			answer0.01.csv   // when beta is set to 0.01
 			answer0.1.csv    // when beta is set to 0.1
 			answer1.0.csv    // when beta is set to 1.0
-For Question 5,6,7:	Top_100_Vocs.csv
+For Question 5,6,7:	rankvocs.py  --> Top_100_Vocs.csv
  
  
  
