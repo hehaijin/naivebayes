@@ -1,13 +1,9 @@
 ################################################################
 # Description:                                                 #
-# Read from the training file first to obtain required         # 
-# information, then use the information to calculate P(X) and  #
-# P(X|Y) in order to predict the newsgroup of testing data     #
-# For each row in testing data, go through those 20 newsgroups #
-# and find a probability for each newsgroup. The newsgroup     #
-# with the highest probability is the answer of prediction     #
-# Algorithm:                                                   #
-# P(Y|X) is propotional to P(X|Y)P(Y)                          #
+# Based on project2.py
+# Use Matrix multiplication to speed up calculation.
+# Iterate with different beta values and output 6 result files
+# with the name: "result-beta".csv"
 ################################################################
 
 import csv
@@ -18,10 +14,10 @@ import time
 VOC_NUM = 61188    #vacabulary count
 TRAINING_NUM = 12000   #total training files
 GROUP_NUM = 20 #total groups
-#num_group = np.zeros(GROUP_NUM)    
 voc_in_group = np.zeros([GROUP_NUM,VOC_NUM])  #array to store probability estimation
 PY=np.zeros(GROUP_NUM) #array to store PY
 
+# the function that reads and calculates the prediction with specified beta.
 def Main(beta):
   csvfile = open("result.csv", 'rb')
   resultReader = csv.reader(csvfile)
@@ -71,7 +67,7 @@ def Main(beta):
     
     
     
-
+# the running code with different beta values.
 
 beta=0.00001
 while( beta <=1 ):

@@ -6,7 +6,7 @@ Authors:	Chih-Yu Shen 		cyushen@unm.edu
 		Christina Xuan Yu 	xyu@unm.edu
 /**********************************************************
 
-1. This project is impelemented with Python. The files contained 
+1. This project is impelemented with Python 2. The files contained 
 in the project are:
 	README.txt
 	Makefile
